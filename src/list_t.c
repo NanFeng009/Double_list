@@ -25,10 +25,21 @@ void list_destroy(struct list_t *list) {
 void list_prepend(struct list_t *list, int key) {
     struct le *newnode = (struct le *) malloc(sizeof(struct le));
     newnode->key = key;
+
     newnode->next = list->nil.next;
     list->nil.next->prev = newnode;
     list->nil.next = newnode;
     newnode->prev = &list->nil;
+}
+
+void list_append(struct list_t *list, int key) {
+    struct le *newnode = (struct le *) malloc(sizeof(struct le));
+    newnode->key = key;
+
+    newnode->next = &list->nil;
+    newnode->prev = list->nil.prev;
+    list->nil.prev->next = newnode;
+    list->nil.prev = newnode;
 }
 
 struct le * list_search(struct list_t *list, int key) {

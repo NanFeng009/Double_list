@@ -6,18 +6,20 @@ CC = gcc
 
 CUR_DIR = $(shell pwd)
 
-#INC = -I./Macro 
+INC = -I./src
 
 #LIB += -lmysqlclient -L/usr/lib/mysql
 
 .PHONEY : clean all
 
-SRCS = $(wildcard *.c)
+VPATH = src test
+
+SRCS = list_t.c main.c hash_t.c
 
 OBJS = $(SRCS:.c=.o)
 
 
-TARGET = test
+TARGET = util 
 
 all : $(TARGET)
 
@@ -25,7 +27,7 @@ $(TARGET):$(OBJS)
 	$(CC) $(C_FLAGS) $^ $(LIB) $(INC) -o $@
 
 %.o:%.c
-	$(CC) $(C_FLAGS) -c $< -o $@
+	$(CC) $(C_FLAGS) $(INC) -c $< -o $@
 
 
 clean:
