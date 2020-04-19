@@ -2,7 +2,17 @@
 #include "list_t.h"
 #include <stdlib.h>
 
+#define NUM_BUCKETS 10
 
+// Djb2 hash function
+unsigned long hash_djb2(char *str) {
+
+        unsigned long hash = 5381;
+        int c;
+        while ((c = *str++))
+            hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+        return hash % NUM_BUCKETS;
+}
 /**
  * Init a new hashmap table
  *
@@ -49,9 +59,9 @@ void hash_append(struct hash_t *h, uint32_t key)
     if (!h)
         return;
 
-    //list_append((h->bucket) + (key % (h->bsize-1)), key);
 	// append the key to the tail of list
-    list_append(h->bucket + (key % (h->bsize-1)) , key);
+    //list_append(h->bucket + (key % (h->bsize-1)) , key);
+    list_prepend(h->bucket + (key % (h->bsize-1)) , key);
 }
 
 
@@ -83,9 +93,25 @@ struct le * hash_search(struct hash_t *h, uint32_t key)
 
 void hash_foreach(struct hash_t *h)
 {
+	if (!h)
+		return;
+
 	for(int i = 0; i < h->bsize; i++){
 		list_foreach(h->bucket + i);
 	}
 
 	return;
+}
+
+void hash_destory(struct hash_t *h)
+{
+	if (!h)
+		return;
+
+	for(int i = 0; i < h->bsize; i++){
+		list_destroy(h->bucket + i);
+	}
+
+	return;
+
 }

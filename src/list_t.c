@@ -63,6 +63,8 @@ void list_delete(struct list_t *list, int key) {
 
 	node->prev->next = node->next;
 	node->next->prev = node->prev;
+
+	free(node);
 }
 
 void list_foreach(struct list_t * list)

@@ -30,6 +30,7 @@ int main()
 	hash_delete(myhash, 6);
 	printf("-----------\n");
 	hash_foreach(myhash);
+	 hash_destory(myhash);
     return 0;
 }
 
