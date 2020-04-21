@@ -1,5 +1,5 @@
-#include "hash_t.h"
-#include "list_t.h"
+#include "mhash.h"
+#include "mlist.h"
 #include <stdlib.h>
 
 #define NUM_BUCKETS 10

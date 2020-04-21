@@ -14,7 +14,7 @@ INC = -I./src
 
 VPATH = src test
 
-SRCS = list_t.c main.c hash_t.c
+SRCS = mlist.c main.c mhash.c
 
 OBJS = $(SRCS:.c=.o)
 

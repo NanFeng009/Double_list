@@ -1,6 +1,6 @@
 #ifndef HASH_T_H
 #define HASH_T_H
-#include "list_t.h"
+#include "mlist.h"
 #include <stdint.h>
 
 /** Defines a hashmap table */
@@ -14,4 +14,5 @@ void hash_append(struct hash_t *h, uint32_t key);
 void hash_delete(struct hash_t *h, uint32_t key);
 struct le * hash_search(struct hash_t *h, uint32_t key);
 void hash_foreach(struct hash_t *h);
+void hash_destory(struct hash_t *h);
 #endif

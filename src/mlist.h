@@ -5,10 +5,11 @@ struct le {
     int key;
     struct le *prev;
     struct le *next;
+    struct le *hash_next;
 };
 
 struct list_t{
-    struct le nil;
+    struct le * nil;
 };
 
 void list_init(struct list_t *list);
