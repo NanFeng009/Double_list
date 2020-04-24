@@ -12,7 +12,6 @@ void list_init(struct list_t *list) {
     list->nil->key = 0;
     list->nil->prev = list->nil;
     list->nil->next = list->nil;
-//    list->nil->hash_next = list->nil;
 }
 
 void list_destroy(struct list_t *list) {
@@ -26,7 +25,7 @@ void list_destroy(struct list_t *list) {
     }
 }
 
-void list_prepend(struct list_t *list, int key) {
+void list_add(struct list_t *list, int key) {
     struct le *newnode = (struct le *) malloc(sizeof(struct le));
     newnode->key = key;
 
@@ -36,7 +35,7 @@ void list_prepend(struct list_t *list, int key) {
     newnode->prev = list->nil;
 }
 
-void list_append(struct list_t *list, int key) {
+void list_add_tail(struct list_t *list, int key) {
     struct le *newnode = (struct le *) malloc(sizeof(struct le));
     newnode->key = key;
 
@@ -46,7 +45,7 @@ void list_append(struct list_t *list, int key) {
     list->nil->prev = newnode;
 }
 
-struct le * list_search(struct list_t *list, int key) {
+struct le * list_entry(struct list_t *list, int key) {
     struct le *node = list->nil->next;
     
     while (node != list->nil && node->key != key) {
@@ -60,8 +59,8 @@ struct le * list_search(struct list_t *list, int key) {
     }
 }
 
-void list_delete(struct list_t *list, int key) {
-	struct le *node = list_search(list, key);
+void list_del(struct list_t *list, int key) {
+	struct le *node = list_entry(list, key);
 	if (node == NULL)
 		return;
 

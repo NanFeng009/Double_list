@@ -54,14 +54,14 @@ int hash_init(struct hash_t **hp, uint32_t bsize)
  * @param h      Hashmap table
  * @param le     List element
  */
-void hash_append(struct hash_t *h, uint32_t key)
+void hash_add(struct hash_t *h, uint32_t key)
 {
     if (!h)
         return;
 
 	// append the key to the tail of list
-    //list_append(h->bucket + (key % (h->bsize-1)) , key);
-    list_prepend(h->bucket + (key % (h->bsize-1)) , key);
+    //list_add_tail(h->bucket + (key % (h->bsize-1)) , key);
+    list_add(h->bucket + (key % (h->bsize-1)) , key);
 }
 
 
@@ -70,22 +70,22 @@ void hash_append(struct hash_t *h, uint32_t key)
  *
  * @param le     List element
  */
-void hash_delete(struct hash_t *h, uint32_t key)
+void hash_del(struct hash_t *h, uint32_t key)
 {
     if (!h)
         return;
 
-    list_delete((h->bucket) + (key % (h->bsize-1)), key);
+    list_del((h->bucket) + (key % (h->bsize-1)), key);
 }
 
 
-struct le * hash_search(struct hash_t *h, uint32_t key)
+struct le * hash_entry(struct hash_t *h, uint32_t key)
 {
 	if (!h)
 		return NULL;
 
 	struct le *node;
-	node = list_search((h->bucket) + (key % (h->bsize-1)), key);
+	node = list_entry((h->bucket) + (key % (h->bsize-1)), key);
 
 	return node;
 
